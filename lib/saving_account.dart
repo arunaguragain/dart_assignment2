@@ -1,6 +1,6 @@
 import 'package:dart_assignment2/banking_system.dart';
 
-class SavingAccount extends BankAccount {
+class SavingAccount extends BankAccount implements InterestBearing {
   double minimumBalance = 500;
   double interest = 0.02;
   int withdrawalLimit = 3;
@@ -29,5 +29,11 @@ class SavingAccount extends BankAccount {
       print("Withdrawal limit crossed");
     }
     return getBalance;
+  }
+
+  @override
+  double calculateInterest() {
+    interest = 0.02 * getBalance;
+    return interest;
   }
 }

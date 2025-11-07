@@ -1,6 +1,6 @@
 import 'package:dart_assignment2/banking_system.dart';
 
-class PremiumAccount extends BankAccount {
+class PremiumAccount extends BankAccount implements InterestBearing {
   double minimumBalance = 10000;
   double interest = 0.05;
 
@@ -11,12 +11,11 @@ class PremiumAccount extends BankAccount {
     setBalance = getBalance + amount;
     print("\$$amount deposited successfully");
     return getBalance;
-
   }
 
   @override
   double withdraw(double amount) {
-    if ( getBalance - amount < minimumBalance) {
+    if (getBalance - amount < minimumBalance) {
       print("Insufficient amount");
     } else {
       setBalance = getBalance - amount;
@@ -24,10 +23,10 @@ class PremiumAccount extends BankAccount {
     }
     return getBalance;
   }
+
+  @override
+  double calculateInterest() {
+    interest = 0.05 * getBalance;
+    return interest;
+  }
 }
-
-
-
- 
-      
-    
