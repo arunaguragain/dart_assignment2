@@ -39,4 +39,6 @@ abstract class BankAccount {
   }
 }
 
-
+abstract class InterestBearing {
+  double calculateInterest();
+}
