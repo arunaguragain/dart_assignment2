@@ -11,7 +11,7 @@ class SavingAccount extends BankAccount {
   @override
   double deposit(double amount) {
     setBalance = getBalance + amount;
-    print("$amount deposited successfully");
+    print("\$$amount deposited successfully");
     return getBalance;
   }
 
@@ -19,10 +19,10 @@ class SavingAccount extends BankAccount {
   double withdraw(double amount) {
     if (withdrawalLimit > withdrawalcount) {
       if (getBalance < amount || getBalance - amount < minimumBalance) {
-        print("There is no sufficient amount");
+        print("Insufficient amount");
       } else {
         setBalance = getBalance - amount;
-        print("$amount withdrawn successfully");
+        print("\$$amount withdrawn successfully");
         withdrawalcount += 1;
       }
     } else {

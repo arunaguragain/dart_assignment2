@@ -9,8 +9,8 @@ abstract class BankAccount {
   double deposit(double amount);
   void displayAccountInfo() {
     print("Account info is");
-    print("Account number: $_accountNumber");
-    print("Account Holder Name: $_accountHolderName");
+    print("Account number: \$$_accountNumber");
+    print("Account Holder Name: \$$_accountHolderName");
     print("Balance: $_balance");
   }
 
