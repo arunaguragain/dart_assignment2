@@ -9,7 +9,7 @@ class Bank {
   }
 
   BankAccount? findAccount(int accountNumber) {
-    for (var account in bankAccounts) {
+    for (BankAccount account in bankAccounts) {
       if (account.getAccountNumber == accountNumber) {
         return account;
       }
@@ -38,14 +38,28 @@ class Bank {
   }
 
   void generateReport() {
-  print("Account Report");
-  for (var account in bankAccounts) {
-    account.displayAccountInfo();
-
-    if (account is InterestBearing) {
-      print("Interest: \$${(account as InterestBearing).calculateInterest()}");
-    } 
+    print("Account Report");
+    for (BankAccount account in bankAccounts) {
+      account.displayAccountInfo();
+      if (account is InterestBearing) {
+        print(
+          "Interest acquired: \$${(account as InterestBearing).calculateInterest()}",
+        );
+      }
+    }
   }
-}
 
+  void applyInterest() {
+    for (BankAccount account in bankAccounts) {
+      if (account is InterestBearing) {
+        double interest = (account as InterestBearing).calculateInterest();
+        account.setBalance = account.getBalance + interest;
+        print("\$$interest is acquired as interest and balance is \$ ${account.getBalance}");
+      }
+    }
+  }
+
+  void transactionHistory(){
+
+  }
 }
