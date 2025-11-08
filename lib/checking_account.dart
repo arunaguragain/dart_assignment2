@@ -7,6 +7,7 @@ class CheckingAccount extends BankAccount {
   double deposit(double amount) {
     setBalance = getBalance + amount;
     print("\$$amount deposited successfully");
+    addTransaction("transaction done: \$$amount deposited");
     return getBalance;
   }
 
@@ -15,9 +16,11 @@ class CheckingAccount extends BankAccount {
     if (getBalance >= amount) {
       setBalance = getBalance - amount;
       print("\$$amount withdrawn successfully");
+      addTransaction("transaction done: \$$amount withdrawn");
     } else {
       setBalance = getBalance - amount - 35;
       print("\$$amount withdrawn successfully and \$35 applied as overdraft fee ");
+      addTransaction("transaction done: \$$amount withdrawn and \$35 applied as overdraft fee");
     }
     return getBalance;
   }

@@ -12,6 +12,7 @@ class SavingAccount extends BankAccount implements InterestBearing {
   double deposit(double amount) {
     setBalance = getBalance + amount;
     print("\$$amount deposited successfully");
+    addTransaction("transaction done: \$$amount deposited");
     return getBalance;
   }
 
@@ -20,20 +21,24 @@ class SavingAccount extends BankAccount implements InterestBearing {
     if (withdrawalLimit > _withdrawalcount) {
       if (getBalance < amount || getBalance - amount < minimumBalance) {
         print("Insufficient amount");
+        addTransaction("transaction failed; insufficient balance");
       } else {
         setBalance = getBalance - amount;
         print("\$$amount withdrawn successfully");
+        addTransaction("transaction done: \$$amount withdrawn");
         _withdrawalcount += 1;
       }
     } else {
       print("Withdrawal limit crossed");
+      addTransaction("transaction failed; withdrrawal limit crossed");
+
     }
     return getBalance;
   }
 
   @override
   double calculateInterest() {
-    double interest = (0.02 * getBalance) / 12 ;
+    double interest = (interestRate * getBalance) / 12;
     return interest;
   }
 }

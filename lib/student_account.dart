@@ -8,9 +8,11 @@ class StudentAccount extends BankAccount {
   double deposit(double amount) {
     if (getBalance + amount > maximumBalance) {
       print("cannot deposit: limit exceeds");
+      addTransaction("transaction failed: limit exceeds");
     } else {
       setBalance = getBalance + amount;
       print("\$$amount deposited successfully");
+      addTransaction("transaction done: \$$amount deposited");
     }
     return getBalance;
   }
@@ -19,9 +21,11 @@ class StudentAccount extends BankAccount {
   double withdraw(double amount) {
     if (getBalance < amount) {
       print("Insufficient amount");
+      addTransaction("transaction failed: insufficient amount");
     } else {
       setBalance = getBalance - amount;
       print("\$$amount withdrawn successfully");
+      addTransaction("transaction done: \$$amount withdrawn");
     }
     return getBalance;
   }

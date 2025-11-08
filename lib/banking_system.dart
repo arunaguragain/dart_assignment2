@@ -3,6 +3,8 @@ abstract class BankAccount {
   String _accountHolderName;
   double _balance;
 
+  List<String> _transactionHistory = [];
+
   BankAccount(this._accountHolderName, this._accountNumber, this._balance);
 
   double withdraw(double amount);
@@ -12,6 +14,21 @@ abstract class BankAccount {
     print("Account number: \$$_accountNumber");
     print("Account Holder Name: \$$_accountHolderName");
     print("Balance: $_balance");
+  }
+
+  void addTransaction(String transaction) {
+    _transactionHistory.add(transaction);
+  }
+
+  void showTransactionHistory() {
+    print("Transaction history for $_accountNumber:");
+    if (_transactionHistory.isEmpty) {
+      print("No transaction yet");
+    } else {
+      for ( String transaction in _transactionHistory) {
+        print(transaction);
+      }
+    }
   }
 
   int get getAccountNumber {

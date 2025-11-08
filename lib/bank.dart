@@ -22,8 +22,9 @@ class Bank {
     BankAccount? sender = findAccount(senderAccount);
     BankAccount? receiver = findAccount(receiverAccount);
 
-    if (sender == null || receiver == null) {
+    if (sender == null && receiver == null) {
       print("Transfer failed: account not found");
+      return;
     }
 
     double senderOldBalance = sender!.getBalance;
@@ -32,8 +33,11 @@ class Bank {
     if (sender.getBalance < senderOldBalance) {
       receiver!.deposit(amount);
       print("\$$amount transferred sucessfully");
+      sender.addTransaction("transaction done:\$$amount transferred sucessfully ");
+      receiver.addTransaction("transaction done:\$$amount deposited sucessfully ");
     } else {
       print("Insufficient fund");
+      sender.addTransaction("transaction failed: insufficient fund");
     }
   }
 
@@ -54,12 +58,11 @@ class Bank {
       if (account is InterestBearing) {
         double interest = (account as InterestBearing).calculateInterest();
         account.setBalance = account.getBalance + interest;
-        print("\$$interest is acquired as interest and balance is \$ ${account.getBalance}");
+        print(
+          "\$$interest is acquired as interest and balance is \$ ${account.getBalance}",
+        );
+        account.addTransaction("transaction done: \$$interest deposited");
       }
     }
-  }
-
-  void transactionHistory(){
-
   }
 }

@@ -34,4 +34,8 @@ void main() {
   bank.generateReport();
 
   bank.applyInterest();
+
+  savingacc1.showTransactionHistory();
+  checkingAcc1.showTransactionHistory();
+  premiumAcc1.showTransactionHistory();
 }
