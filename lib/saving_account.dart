@@ -10,28 +10,35 @@ class SavingAccount extends BankAccount implements InterestBearing {
 
   @override
   double deposit(double amount) {
-    setBalance = getBalance + amount;
-    print("\$$amount deposited successfully");
-    addTransaction("transaction done: \$$amount deposited");
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
+    } else {
+      setBalance = getBalance + amount;
+      print("\$$amount deposited successfully");
+      addTransaction("transaction done: \$$amount deposited");
+    }
     return getBalance;
   }
 
   @override
   double withdraw(double amount) {
-    if (withdrawalLimit > _withdrawalcount) {
-      if (getBalance < amount || getBalance - amount < minimumBalance) {
-        print("Insufficient amount");
-        addTransaction("transaction failed; insufficient balance");
-      } else {
-        setBalance = getBalance - amount;
-        print("\$$amount withdrawn successfully");
-        addTransaction("transaction done: \$$amount withdrawn");
-        _withdrawalcount += 1;
-      }
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
     } else {
-      print("Withdrawal limit crossed");
-      addTransaction("transaction failed; withdrrawal limit crossed");
-
+      if (withdrawalLimit > _withdrawalcount) {
+        if (getBalance < amount || getBalance - amount < minimumBalance) {
+          print("Insufficient amount");
+          addTransaction("transaction failed; insufficient balance");
+        } else {
+          setBalance = getBalance - amount;
+          print("\$$amount withdrawn successfully");
+          addTransaction("transaction done: \$$amount withdrawn");
+          _withdrawalcount += 1;
+        }
+      } else {
+        print("Withdrawal limit crossed");
+        addTransaction("transaction failed; withdrrawal limit crossed");
+      }
     }
     return getBalance;
   }

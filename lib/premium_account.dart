@@ -8,28 +8,36 @@ class PremiumAccount extends BankAccount implements InterestBearing {
 
   @override
   double deposit(double amount) {
-    setBalance = getBalance + amount;
-    print("\$$amount deposited successfully");
-    addTransaction("transaction done: \$$amount deposited");
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
+    } else {
+      setBalance = getBalance + amount;
+      print("\$$amount deposited successfully");
+      addTransaction("transaction done: \$$amount deposited");
+    }
     return getBalance;
   }
 
   @override
   double withdraw(double amount) {
-    if (getBalance - amount < minimumBalance) {
-      print("Insufficient amount");
-      addTransaction("transaction failed: insufficient amount");
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
     } else {
-      setBalance = getBalance - amount;
-      print("\$$amount withdrawn successfully");
-      addTransaction("transaction done: \$$amount withdrawn");
+      if (getBalance - amount < minimumBalance) {
+        print("Insufficient amount");
+        addTransaction("transaction failed: insufficient amount");
+      } else {
+        setBalance = getBalance - amount;
+        print("\$$amount withdrawn successfully");
+        addTransaction("transaction done: \$$amount withdrawn");
+      }
     }
     return getBalance;
   }
 
   @override
   double calculateInterest() {
-    double interest = (interestRate * getBalance)/12;
+    double interest = (interestRate * getBalance) / 12;
     return interest;
   }
 }

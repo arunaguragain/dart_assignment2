@@ -6,26 +6,34 @@ class StudentAccount extends BankAccount {
 
   @override
   double deposit(double amount) {
-    if (getBalance + amount > maximumBalance) {
-      print("cannot deposit: limit exceeds");
-      addTransaction("transaction failed: limit exceeds");
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
     } else {
-      setBalance = getBalance + amount;
-      print("\$$amount deposited successfully");
-      addTransaction("transaction done: \$$amount deposited");
+      if (getBalance + amount > maximumBalance) {
+        print("cannot deposit: limit exceeds");
+        addTransaction("transaction failed: limit exceeds");
+      } else {
+        setBalance = getBalance + amount;
+        print("\$$amount deposited successfully");
+        addTransaction("transaction done: \$$amount deposited");
+      }
     }
     return getBalance;
   }
 
   @override
   double withdraw(double amount) {
-    if (getBalance < amount) {
-      print("Insufficient amount");
-      addTransaction("transaction failed: insufficient amount");
+    if (amount <= 0) {
+      throw Exception("Amount must be greater than zero.");
     } else {
-      setBalance = getBalance - amount;
-      print("\$$amount withdrawn successfully");
-      addTransaction("transaction done: \$$amount withdrawn");
+      if (getBalance < amount) {
+        print("Insufficient amount");
+        addTransaction("transaction failed: insufficient amount");
+      } else {
+        setBalance = getBalance - amount;
+        print("\$$amount withdrawn successfully");
+        addTransaction("transaction done: \$$amount withdrawn");
+      }
     }
     return getBalance;
   }

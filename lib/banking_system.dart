@@ -3,7 +3,7 @@ abstract class BankAccount {
   String _accountHolderName;
   double _balance;
 
-  List<String> _transactionHistory = [];
+  final List<String> _transactionHistory = [];
 
   BankAccount(this._accountHolderName, this._accountNumber, this._balance);
 
