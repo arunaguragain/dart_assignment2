@@ -12,12 +12,13 @@ class CheckingAccount extends BankAccount {
 
   @override
   double withdraw(double amount) {
-    setBalance = getBalance - amount;
-    if (getBalance < 0) {
-      setBalance = getBalance - 35;
-      print("\$35 applied as overdraft fee ");
+    if (getBalance >= amount) {
+      setBalance = getBalance - amount;
+      print("\$$amount withdrawn successfully");
+    } else {
+      setBalance = getBalance - amount - 35;
+      print("\$$amount withdrawn successfully and \$35 applied as overdraft fee ");
     }
-    print("\$$amount withdrawn successfully");
     return getBalance;
   }
 }
